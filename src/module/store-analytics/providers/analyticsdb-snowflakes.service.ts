@@ -11,7 +11,6 @@ export class SnowflakesDB extends AnalyticsDatabase {
     super()
   }
   
-  
   async getDataById(id: string): Promise<Conversation[]> {
     console.log("I am here")
     const query = "select * from STORE.conversations where conversation_id = :conversation_id";
@@ -22,5 +21,9 @@ export class SnowflakesDB extends AnalyticsDatabase {
       mapToModel: true
     });
     return results;
+  }
+
+  async writeData(data: any): Promise<Conversation> {
+    return 
   }
 }

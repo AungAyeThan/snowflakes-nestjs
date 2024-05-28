@@ -29,4 +29,8 @@ export class ClickhouseDB extends AnalyticsDatabase {
       throw error;
     }
   }
+
+  async writeData(data: any): Promise<Conversation> {
+    return 
+  }
 }

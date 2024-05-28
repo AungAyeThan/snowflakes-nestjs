@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { AnalyticsDatabase } from '../providers/abstract-analyticsdb.service';
+import { DatabaseService } from '../providers/database.service';
 
 @Injectable()
 export class ConsumerHandlerSvc {
