@@ -2,13 +2,14 @@ import { Injectable, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { Conversation } from './conversations.model';
+import { ConsumerHandlerSvc } from '../store-analytics/service/consumer-handler.service';
 
 @Injectable()
 export class ConversationService {
   constructor(
     @InjectModel(Conversation)
     private readonly conversationModel: typeof Conversation,
-    private sequelize: Sequelize
+    private svc: ConsumerHandlerSvc,
   ) {}
 
   async findAll(): Promise<Conversation[]> {
@@ -23,14 +24,8 @@ export class ConversationService {
     return this.conversationModel.create(conversation);
   }
 
-  async findByQuery(conversation_id: number): Promise<Conversation[]> {
-    const query = 'select * from STORE.conversations where conversation_id = :conversation_id';
-    const replacements = { conversation_id };
-    const results = await this.sequelize.query(query, {
-      replacements,
-      model: Conversation,
-      mapToModel: true
-    });
+  async findByQuery(conversation_id: string): Promise<Conversation[]> {
+    const results = this.svc.getData(conversation_id)
     return results;
   }
 }

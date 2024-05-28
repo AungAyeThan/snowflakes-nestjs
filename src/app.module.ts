@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './module/user/user.module';
-import { DBRootModule } from './module/db/db.module';
+import { DBRootModule } from './module/adapter/snowflakes/db.module';
 import { ConversationModule } from './module/conversations/conversations.module';
+import { ClickhouseModule } from './module/adapter/clickhouse/db.module';
+import { StoreAnalyticsModule } from './module/store-analytics/store-analytics.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     DBRootModule.snowflake(),
-    UserModule,
-    ConversationModule
+    ConversationModule,
+    StoreAnalyticsModule
   ],
 })
 export class AppModule {}

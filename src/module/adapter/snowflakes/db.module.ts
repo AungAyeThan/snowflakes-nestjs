@@ -1,8 +1,7 @@
 import { DynamicModule } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from '../user/user.model';
-import { Conversation } from '../conversations/conversations.model';
+import { Conversation } from '../../conversations/conversations.model';
 
 export class DBRootModule {
   static snowflake(): DynamicModule {
@@ -17,7 +16,7 @@ export class DBRootModule {
         password: configService.get<string>('SNOWFLAKE_PASSWORD'),
         database: configService.get<string>('SNOWFLAKE_DATABASE'),
         schema: configService.get<string>('SNOWFLAKE_SCHEMA'),
-        models: [User, Conversation],
+        models: [Conversation],
         dialectOptions: {
           account: configService.get<string>('SNOWFLAKE_ACCOUNT'),
           warehouse: configService.get<string>('SNOWFLAKE_WAREHOUSE'),

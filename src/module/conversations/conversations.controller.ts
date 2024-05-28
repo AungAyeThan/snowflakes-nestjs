@@ -23,7 +23,7 @@ export class ConversationController {
 
 
   @Get('/query/:conversation_id')
-  async findByQuery(@Param('conversation_id') id: number): Promise<Conversation[]> {
+  async findByQuery(@Param('conversation_id') id: string): Promise<Conversation[]> {
     return this.conversationService.findByQuery(id);
   }
 }
